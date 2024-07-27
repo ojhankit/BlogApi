@@ -19,6 +19,7 @@
           >
         </p>
         <p>Created at: {{ blog.created_at }}</p>
+        <a href="{% url 'blog_detail' blog.id %}">view</a>
       </li>
       {% empty %}
       <p>No blogs found.</p>
