@@ -12,7 +12,7 @@
 
     <h3>Comments</h3>
     <ul>
-      {% for comment in blog.comments.all %}
+      {% for comment in comments %}
       <li>
         <strong>{{ comment.user.username }}</strong>: {{ comment.content }}
         <p>Posted at: {{ comment.created_at }}</p>

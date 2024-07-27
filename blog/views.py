@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect ,get_object_or_404
-from .models import Blog ,CustomUser
+from .models import Blog ,CustomUser ,Comment
 from .forms import BlogForm ,CommentForm
 from django.contrib.auth.decorators import login_required
 
@@ -17,7 +17,8 @@ def blog_list_user(request ,pk):
 @login_required
 def blog_detail(request ,blog_id):
     blog = get_object_or_404(Blog ,id=blog_id)
-    return render(request ,'blog/blog_detail.html' ,{'blog':blog})
+    comments = Comment.objects.filter(blog=blog)
+    return render(request ,'blog/blog_detail.html' ,{'blog':blog ,'comments':comments})
 
 @login_required
 def create_blog(request):
@@ -51,7 +52,7 @@ def add_comment(request ,blog_id):
             comment.user = request.user
             comment.blog = blog
             comment.save()
-            return redirect('blog_detail')
+            return redirect('blog_detail' ,blog_id=blog_id)
     else:
         form = CommentForm()
     return render(request ,'blog/add_comment.html' ,{'form':form ,'blog':blog})
