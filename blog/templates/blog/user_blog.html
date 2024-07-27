@@ -1,0 +1,47 @@
+{% comment %} <!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ user.username }}'s Blogs</title>
+  </head>
+  <body>
+    <h2>{{ user.username }}'s Blogs</h2>
+    <a href="{% url 'create' %}">create Blog</a>
+    <ul>
+      {% for blog in user_blogs %}
+      <li>
+        <h3>{{ blog.title }}</h3>
+        <p>{{ blog.description }}</p>
+        <p>Created at: {{ blog.created_at }}</p>
+        <a href="{% url 'delete' blog.user.pk %}">Delete</a>
+      </li>
+      {% empty %}
+      <p>No blogs found for {{ user.username }}.</p>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
+{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ user.username }}'s Blogs</title>
+  </head>
+  <body>
+    <h2>{{ user.username }}'s Blogs</h2>
+    <a href="{% url 'create' %}">Create a new blog</a>
+    <ul>
+      {% for blog in user_blog %}
+      <li>
+        <h3>{{ blog.title }}</h3>
+        <p>{{ blog.description }}</p>
+        <p>Created at: {{ blog.created_at }}</p>
+        <a href="{% url 'delete' blog.user.pk %}">Delete</a>
+      </li>
+      {% empty %}
+      <p>No blogs found for {{ user.username }}.</p>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'blog_list' %}">Back to Blog List</a>
+  </body>
+</html>

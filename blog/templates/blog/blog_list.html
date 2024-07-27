@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog List</title>
+  </head>
+  <body>
+    <h2>Blog List</h2>
+    <a href="{% url 'user_blog' request.user.pk %}">My Blogs</a>
+    <a href="{% url 'create' %}">create Blog</a>
+    <ul>
+      {% for blog in blogs %}
+      <li>
+        <h3>{{ blog.title }}</h3>
+        <p>{{ blog.description }}</p>
+        <p>
+          Created by:
+          <a href="{% url 'user_blog' blog.user.pk %}"
+            >{{ blog.user.username }}</a
+          >
+        </p>
+        <p>Created at: {{ blog.created_at }}</p>
+      </li>
+      {% empty %}
+      <p>No blogs found.</p>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
